@@ -7,7 +7,7 @@ import {
   fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-import { logOut, setUser } from "../features/auth/authSlice";
+import { logout, setUser } from "../features/auth/authSlice";
 import { toast } from "sonner";
 
 const baseQuery = fetchBaseQuery({
@@ -32,10 +32,15 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions);
 
   if (result?.error?.status === 404) {
-    toast.error(result?.error?.data?.message);
+    toast.error(result.error.data.message);
   }
-
+  if (result?.error?.status === 403) {
+    toast.error(result.error.data.message);
+  }
   if (result?.error?.status === 401) {
+    //* Send Refresh
+    console.log("Sending refresh token");
+
     const res = await fetch("http://localhost:5000/api/v1/auth/refresh-token", {
       method: "POST",
       credentials: "include",
@@ -55,14 +60,16 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 
       result = await baseQuery(args, api, extraOptions);
     } else {
-      api.dispatch(logOut);
+      api.dispatch(logout());
     }
   }
+
   return result;
 };
 
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
+  tagTypes: ["semester", "courses", "offeredCourse"],
   endpoints: () => ({}),
 });

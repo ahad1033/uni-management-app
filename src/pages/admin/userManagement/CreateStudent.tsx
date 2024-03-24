@@ -1,93 +1,49 @@
-import { Button, Col, Divider, Form, Input, Row } from "antd";
 import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
-
 import PHForm from "../../../components/form/PHForm";
 import PHInput from "../../../components/form/PHInput";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHSelect from "../../../components/form/PHSelect";
+import { bloodGroupOptions, genderOptions } from "../../../constants/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
-
 import {
-  bloodGroupOptions,
-  genderOptions,
-} from "../../../components/constants/global";
-import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
+  useGetAcademicDepartmentsQuery,
+  useGetAllSemestersQuery,
+} from "../../../redux/features/admin/academicManagement.api";
 import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 
-
-const studentDummyData = {
-  password: 'student123',
-  student: {
-    name: {
-      firstName: 'I am ',
-      middleName: 'Student',
-      lastName: 'Number 1',
-    },
-    gender: 'male',
-    dateOfBirth: '1990-01-01',
-    bloogGroup: 'A+',
-
-    email: 'student3@gmail.com',
-    contactNo: '1235678',
-    emergencyContactNo: '987-654-3210',
-    presentAddress: '123 Main St, Cityville',
-    permanentAddress: '456 Oak St, Townsville',
-
-    guardian: {
-      fatherName: 'James Doe',
-      fatherOccupation: 'Engineer',
-      fatherContactNo: '111-222-3333',
-      motherName: 'Mary Doe',
-      motherOccupation: 'Teacher',
-      motherContactNo: '444-555-6666',
-    },
-
-    localGuardian: {
-      name: 'Alice Johnson',
-      occupation: 'Doctor',
-      contactNo: '777-888-9999',
-      address: '789 Pine St, Villageton',
-    },
-
-    admissionSemester: '65bb60ebf71fdd1add63b1c0',
-    academicDepartment: '65b4acae3dc8d4f3ad83e416',
-  },
-};
-
-//! This is only for development
-//! Should be removed
 const studentDefaultValues = {
   name: {
-    firstName: 'I am ',
-    middleName: 'Student',
-    lastName: 'Number 1',
+    firstName: "I am ",
+    middleName: "Student",
+    lastName: "Number 1",
   },
-  gender: 'male',
+  gender: "male",
 
-  bloogGroup: 'A+',
+  bloogGroup: "A+",
 
-  contactNo: '1235678',
-  emergencyContactNo: '987-654-3210',
-  presentAddress: '123 Main St, Cityville',
-  permanentAddress: '456 Oak St, Townsville',
+  contactNo: "1235678",
+  emergencyContactNo: "987-654-3210",
+  presentAddress: "123 Main St, Cityville",
+  permanentAddress: "456 Oak St, Townsville",
 
   guardian: {
-    fatherName: 'James Doe',
-    fatherOccupation: 'Engineer',
-    fatherContactNo: '111-222-3333',
-    motherName: 'Mary Doe',
-    motherOccupation: 'Teacher',
-    motherContactNo: '444-555-6666',
+    fatherName: "James Doe",
+    fatherOccupation: "Engineer",
+    fatherContactNo: "111-222-3333",
+    motherName: "Mary Doe",
+    motherOccupation: "Teacher",
+    motherContactNo: "444-555-6666",
   },
 
   localGuardian: {
-    name: 'Alice Johnson',
-    occupation: 'Doctor',
-    contactNo: '777-888-9999',
-    address: '789 Pine St, Villageton',
+    name: "Alice Johnson",
+    occupation: "Doctor",
+    contactNo: "777-888-9999",
+    address: "789 Pine St, Villageton",
   },
 
-  admissionSemester: '65bb60ebf71fdd1add63b1c0',
-  academicDepartment: '65b4acae3dc8d4f3ad83e416',
+  admissionSemester: "65bb60ebf71fdd1add63b1c0",
+  academicDepartment: "65b4acae3dc8d4f3ad83e416",
 };
 
 const CreateStudent = () => {
@@ -113,14 +69,14 @@ const CreateStudent = () => {
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     const studentData = {
-      password: 'student123',
+      password: "student123",
       student: data,
     };
 
     const formData = new FormData();
 
-    formData.append('data', JSON.stringify(studentData));
-    formData.append('file', data.image);
+    formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.image);
 
     addStudent(formData);
 
@@ -303,4 +259,3 @@ const CreateStudent = () => {
 };
 
 export default CreateStudent;
-

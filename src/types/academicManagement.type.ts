@@ -6,7 +6,7 @@ export type TAcademicSemester = {
   startMonth: string;
   endMonth: string;
   createdAt: string;
-  UpdateAt: string;
+  updatedAt: string;
   __v: number;
 };
 

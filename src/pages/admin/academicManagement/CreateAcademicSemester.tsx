@@ -3,8 +3,8 @@ import PHSelect from "../../../components/form/PHSelect";
 
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Button, Col, Flex } from "antd";
-import { semesterOptions } from "../../../components/constants/semester";
-import { monthOptions } from "../../../components/constants/global";
+import { semesterOptions } from "../../../constants/semester";
+import { monthOptions } from "../../../constants/global";
 import { academicSemesterSchema } from "../../../schemas/academicManagement.Schema";
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagement.api";
 import { TResponse } from "../../../types/global.type";
@@ -34,7 +34,7 @@ const CreateAcademicSemester = () => {
     };
 
     try {
-      const res = (await addAcademicSemester(semesterdata)) as TResponse;
+      const res = (await addAcademicSemester(semesterdata)) as TResponse<any>;
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
       } else {

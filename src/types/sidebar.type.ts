@@ -4,17 +4,16 @@ export type TRoute = {
   path: string;
   element: ReactNode;
 };
-
-export type TSideBarItem =
+export type TSidebarItem =
   | {
       key: string;
       label: ReactNode;
-      children?: TSideBarItem[];
+      children?: TSidebarItem[];
     }
   | undefined;
 
 export type TUserPath = {
-  name: string;
+  name?: string;
   path?: string;
   element?: ReactNode;
   children?: TUserPath[];

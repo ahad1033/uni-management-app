@@ -3,7 +3,7 @@ import {
   TAcademicFaculty,
   TAcademicSemester,
   TQueryParam,
-  TREsponseRedux,
+  TResponseRedux,
 } from "../../../types";
 
 import { baseApi } from "../../api/baseApi";
@@ -26,7 +26,7 @@ const academicManagementApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      transformResponse: (response: TREsponseRedux<TAcademicSemester[]>) => {
+      transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
         return {
           data: response.data,
           meta: response.meta,
@@ -44,7 +44,7 @@ const academicManagementApi = baseApi.injectEndpoints({
       query: () => {
         return { url: "/academic-faculties", method: "GET" };
       },
-      transformResponse: (response: TREsponseRedux<TAcademicFaculty[]>) => {
+      transformResponse: (response: TResponseRedux<TAcademicFaculty[]>) => {
         return {
           data: response.data,
           meta: response.meta,
@@ -62,7 +62,7 @@ const academicManagementApi = baseApi.injectEndpoints({
       query: () => {
         return { url: "/academic-departments", method: "GET" };
       },
-      transformResponse: (response: TREsponseRedux<TAcademicDepartment[]>) => {
+      transformResponse: (response: TResponseRedux<TAcademicDepartment[]>) => {
         return {
           data: response.data,
           meta: response.meta,
@@ -83,4 +83,5 @@ export const {
   useGetAllSemestersQuery,
   useAddAcademicSemesterMutation,
   useGetAcademicDepartmentsQuery,
+  useGetAcademicFacultiesQuery,
 } = academicManagementApi;
